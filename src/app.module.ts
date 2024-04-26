@@ -10,7 +10,15 @@ import { DiscountModule } from './discount/discount.module';
 import { ReceiptModule } from './receipt/receipt.module';
 
 @Module({
-  imports: [BreadModule, BeerModule, VegetableModule, ItemModule, OrderModule, DiscountModule, ReceiptModule],
+  imports: [
+    BreadModule,
+    BeerModule,
+    VegetableModule,
+    ItemModule,
+    OrderModule,
+    DiscountModule,
+    ReceiptModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
