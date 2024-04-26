@@ -6,9 +6,10 @@ import { BeerModule } from './beer/beer.module';
 import { VegetableModule } from './vegetable/vegetable.module';
 import { ItemModule } from './item/item.module';
 import { OrderModule } from './order/order.module';
+import { DiscountModule } from './discount/discount.module';
 
 @Module({
-  imports: [BreadModule, BeerModule, VegetableModule, ItemModule, OrderModule],
+  imports: [BreadModule, BeerModule, VegetableModule, ItemModule, OrderModule, DiscountModule],
   controllers: [AppController],
   providers: [AppService],
 })
