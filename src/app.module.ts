@@ -7,9 +7,10 @@ import { VegetableModule } from './vegetable/vegetable.module';
 import { ItemModule } from './item/item.module';
 import { OrderModule } from './order/order.module';
 import { DiscountModule } from './discount/discount.module';
+import { ReceiptModule } from './receipt/receipt.module';
 
 @Module({
-  imports: [BreadModule, BeerModule, VegetableModule, ItemModule, OrderModule, DiscountModule],
+  imports: [BreadModule, BeerModule, VegetableModule, ItemModule, OrderModule, DiscountModule, ReceiptModule],
   controllers: [AppController],
   providers: [AppService],
 })
