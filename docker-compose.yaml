@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'
 
 services:
   nestapp:
@@ -7,13 +7,16 @@ services:
     build: .
     ports:
       - 3000:3000
+    env_file:
+      - .env.production
     environment:
-      - DB_TYPE=postgres
-      - DB_HOST=db
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=postgres
-      - DB_PORT=5432
+      DB_TYPE: $DB_TYPE
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_PORT: $DB_PORT
+      DB_SYNC: $DB_SYNC
     depends_on:
       - db
   db:
@@ -21,10 +24,12 @@ services:
     image: postgres:13
     ports:
       - 5433:5432
+    env_file:
+      - .env.production
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
     volumes:
       - pgdata:/var/lib/postgresql/data
 volumes:
