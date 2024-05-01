@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -7,6 +7,7 @@ import { DiscountModule } from './discount/discount.module';
 import { ItemModule } from './item/item.module';
 import { OrderModule } from './order/order.module';
 import { ReceiptModule } from './receipt/receipt.module';
+import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -34,6 +35,14 @@ import { ReceiptModule } from './receipt/receipt.module';
     ItemModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        whitelist: true,
+      }),
+    },
+  ],
 })
 export class AppModule {}
