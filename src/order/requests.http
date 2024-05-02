@@ -1,0 +1,34 @@
+### Create a new order
+
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+
+}
+
+### Get all orders
+
+GET http://localhost:3000/orders
+
+### Get order by id
+
+GET http://localhost:3000/orders/1
+
+### Update order by id
+
+PATCH http://localhost:3000/orders/1
+Content-Type: application/json
+
+{
+  "items": [{
+      "name": "Carrot",
+      "type": "Vegetable",
+      "price": 10,
+      "weight": 30
+    }]
+}
+
+### Delete order by id
+
+DELETE http://localhost:3000/order/4
