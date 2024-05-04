@@ -1,23 +1,18 @@
-// testUtils.ts
 import { BeerOrigin, ItemType } from '../common/types';
 import { Item } from '../item/entities/item.entity';
 
 export const createBreadItem = ({
   id = 1,
-  receipt = {
-    id: 0,
-    items: [],
-  },
   order = {
     id: 0,
     items: [],
+    receipt: null,
   },
   name = 'Bread',
   ageInDays = 1,
   price = 5,
 }: Partial<Item>): Item => ({
   id,
-  receipt,
   order,
   name,
   type: ItemType.BREAD,
@@ -27,20 +22,16 @@ export const createBreadItem = ({
 
 export const createVegetableItem = ({
   id = 1,
-  receipt = {
-    id: 0,
-    items: [],
-  },
   order = {
     id: 0,
     items: [],
+    receipt: null,
   },
   name = 'Vegetable',
   weight = 100,
   price = 10,
 }: Partial<Item>): Item => ({
   id,
-  receipt,
   order,
   name,
   type: ItemType.VEGETABLE,
@@ -50,13 +41,10 @@ export const createVegetableItem = ({
 
 export const createBeerItem = ({
   id = 1,
-  receipt = {
-    id: 0,
-    items: [],
-  },
   order = {
     id: 0,
     items: [],
+    receipt: null,
   },
   name = 'Beer',
   origin = BeerOrigin.BELGIUM,
@@ -64,7 +52,6 @@ export const createBeerItem = ({
   quantity = 6,
 }: Partial<Item>): Item => ({
   id,
-  receipt,
   order,
   name,
   type: ItemType.BEER,
@@ -75,19 +62,15 @@ export const createBeerItem = ({
 
 export const createUnkownItem = ({
   id = 1,
-  receipt = {
-    id: 0,
-    items: [],
-  },
   order = {
     id: 0,
     items: [],
+    receipt: null,
   },
   name = 'Unknown',
   price = 10,
 }: Partial<Item>): Item => ({
   id,
-  receipt,
   order,
   name,
   price,

@@ -30,7 +30,7 @@ export class DiscountService {
   private calculateBreadDiscount(item: Item): number {
     const NO_DISCOUNT = 0;
     const BUY_1_TAKE_2_DISCOUNT = item.price;
-    const BUY_1_TAKE_3_DISCOUNT = item.price * 2;
+    const BUY_1_TAKE_3_DISCOUNT = parseFloat((item.price * 2).toFixed(2));
     const ageInDays = item.ageInDays || 0;
 
     if (ageInDays <= 1) {
@@ -53,20 +53,24 @@ export class DiscountService {
    * @param item The vegetable item
    * @returns The discount amount
    */
-  private calculateVegetableDiscount(item: Item): number {
-    const FIVE_PERCENT_DISCOUNT = parseFloat((item.price * 0.05).toFixed(2));
-    const SEVEN_PERCENT_DISCOUNT = parseFloat((item.price * 0.07).toFixed(2));
-    const TEN_PERCENT_DISCOUNT = parseFloat((item.price * 0.1).toFixed(2));
+  private calculateVegetableDiscount(item) {
+    const originalPrice = item.price;
+    const FIVE_PERCENT_DISCOUNT = parseFloat((originalPrice * 0.05).toFixed(1));
+    const SEVEN_PERCENT_DISCOUNT = parseFloat(
+      (originalPrice * 0.07).toFixed(1),
+    );
+    const TEN_PERCENT_DISCOUNT = parseFloat((originalPrice * 0.1).toFixed(1));
     const HUNDRED_GRAMS = 100;
     const FIVE_HUNDRED_GRAMS = 500;
     const weight = item.weight || 0;
+    const quantity = weight / 100;
 
     if (weight <= HUNDRED_GRAMS) {
-      return FIVE_PERCENT_DISCOUNT;
+      return quantity * FIVE_PERCENT_DISCOUNT;
     } else if (weight <= FIVE_HUNDRED_GRAMS) {
-      return SEVEN_PERCENT_DISCOUNT;
+      return quantity * SEVEN_PERCENT_DISCOUNT;
     } else {
-      return TEN_PERCENT_DISCOUNT;
+      return quantity * TEN_PERCENT_DISCOUNT;
     }
   }
 
@@ -85,16 +89,18 @@ export class DiscountService {
     const TWO_EUROS = 2.0;
     const FOUR_EUROS = 4.0;
     const NO_DISCOUNT = 0;
-    const packSize = item.quantity || 0;
+    const itemQuantity = item.quantity || 0;
+    const nbrOfPacks = Math.floor(itemQuantity / 6);
+    const isPack = item.quantity >= 6;
 
-    if (packSize === 6) {
+    if (isPack) {
       switch (item.origin) {
         case BeerOrigin.BELGIUM:
-          return THREE_EUROS;
+          return nbrOfPacks * THREE_EUROS;
         case BeerOrigin.NETHERLANDS:
-          return TWO_EUROS;
+          return nbrOfPacks * TWO_EUROS;
         case BeerOrigin.GERMANY:
-          return FOUR_EUROS;
+          return nbrOfPacks * FOUR_EUROS;
         default:
           return NO_DISCOUNT;
       }
