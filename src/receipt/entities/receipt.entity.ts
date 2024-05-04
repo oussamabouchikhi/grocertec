@@ -1,11 +1,12 @@
-import { Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Item } from '../../item/entities/item.entity';
+import { Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Order } from '../../order/entities/order.entity';
 
 @Entity()
 export class Receipt {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToMany(() => Item, (item) => item.receipt)
-  items: Item[];
+  @OneToOne(() => Order, (order) => order.receipt)
+  @JoinColumn()
+  order: Order;
 }

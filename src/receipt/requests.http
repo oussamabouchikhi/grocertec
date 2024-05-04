@@ -1,0 +1,36 @@
+### Create a new receipt
+
+POST http://localhost:3000/api/v1/receipts
+Content-Type: application/json
+
+{
+  "order": {
+    "id": 1,
+    "items": [{
+      "id": 4,
+      "name": "Carrot",
+      "type": "Vegetable",
+      "price": 10,
+      "weight": 30
+    }]
+  }
+}
+
+### Get all receipts
+
+GET http://localhost:3000/api/v1/receipts
+
+### Get receipt by id
+
+GET http://localhost:3000/api/v1/receipts/1
+
+### Update receipt by id
+
+PATCH http://localhost:3000/api/v1/receipts/1
+Content-Type: application/json
+
+{}
+
+### Delete receipt by id
+
+DELETE http://localhost:3000/api/v1/receipts/2

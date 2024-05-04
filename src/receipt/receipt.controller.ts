@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ReceiptService } from './receipt.service';
-import { CreateReceiptDto } from './dto/create-receipt.dto';
-import { UpdateReceiptDto } from './dto/update-receipt.dto';
+import { CreateReceiptDto } from './dto/request/create-receipt.dto';
+import { UpdateReceiptDto } from './dto/request/update-receipt.dto';
 
-@Controller('receipt')
+@Controller('receipts')
 export class ReceiptController {
   constructor(private readonly receiptService: ReceiptService) {}
 
@@ -18,17 +26,17 @@ export class ReceiptController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.receiptService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.receiptService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReceiptDto: UpdateReceiptDto) {
-    return this.receiptService.update(+id, updateReceiptDto);
+  update(@Param('id') id: number, @Body() updateReceiptDto: UpdateReceiptDto) {
+    return this.receiptService.update(id, updateReceiptDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.receiptService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.receiptService.remove(id);
   }
 }
