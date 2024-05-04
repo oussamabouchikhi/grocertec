@@ -1,4 +1,4 @@
-# 🎯 Groctec
+# 🎯 Grocertec
 
 Online Grocery Store
 
@@ -13,10 +13,10 @@ Make sure you have [Nodejs](https://nodejs.org/en/download/current) and [@nestjs
 
 ```bash
 # Clone via SSH or any other method
-$ git clone git@github.com:oussamabouchikhi/groctec
+$ git clone git@github.com:oussamabouchikhi/grocertec
 
 # CD into the project
-$ cd groctec
+$ cd grocertec
 
 # Install the dependencies (feel for to use another package manage like npm or yarn)
 $ pnpm install
@@ -69,7 +69,7 @@ TypeOrmModule.forRoot({
 2. And in case you choose to run the project with docker, enable docker on your machine and run the docker compose to build and run the docker container and specifuy the env file expplicitly by running this command
 
 ```bash
-docker compose —env-file=.env.production up
+docker compose --env-file .env.production up
 ```
 
 Running the app locally
