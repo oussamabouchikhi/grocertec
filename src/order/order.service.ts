@@ -68,7 +68,7 @@ export class OrderService {
 
     if (itemDtos && itemDtos.length > 0) {
       for (const itemDto of itemDtos) {
-        const newItem = this.itemRepository.create(itemDto as CreateItemDto);
+        const newItem = this.itemRepository.create(itemDto);
         await this.itemRepository.save(newItem);
 
         foundOrder.items.push(newItem);

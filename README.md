@@ -1,73 +1,130 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 🎯 Groctec
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Online Grocery Store
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## ⬇ Installation
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+Make sure you have [Nodejs](https://nodejs.org/en/download/current) and [@nestjs/cli](https://docs.nestjs.com/first-steps) installed, otherwise you'll have to install them on your machine.
 
 ```bash
+~ node -v
+~ nest --version
+```
+
+```bash
+# Clone via SSH or any other method
+$ git clone git@github.com:oussamabouchikhi/groctec
+
+# CD into the project
+$ cd groctec
+
+# Install the dependencies (feel for to use another package manage like npm or yarn)
 $ pnpm install
 ```
 
-## Running the app
+## 🛠️ Configuration
+
+Rename the `example.env.production`, `example.env.development` and the `example.test.env` files to `.env.production`, `.env.development` and `.env.test` respectively, then edit the environment variables \
+`DB_TYPE=YOUR_DB_TYPE` for example: postgres \
+`DB_HOST=YOUR_DB_HOST` for example: db \
+`DB_PORT=YOUR_DB_PORT` for example: 5432 \
+`DB_USERNAME=YOUR_DB_USERNAME` for example: postgres \
+`DB_PASSWORD=YOUR_DB_PASSWORD` for example: postgres \
+`DB_NAME=YOUR_DB_NAME` for example: postgres
+
+```.env.production
+DB_TYPE=YOUR_PRODUCTION_ENV_DB_TYPE
+DB_HOST=YOUR_PRODUCTION_ENV_DB_HOST
+DB_PORT=YOUR_PRODUCTION_ENV_DB_PORT
+DB_USERNAME=YOUR_PRODUCTION_ENV_DB_USERNAME
+DB_PASSWORD=YOUR_PRODUCTION_ENV_DB_PASSWORD
+DB_DATABASE=YOUR_PRODUCTION_ENV_DB_DATABASE
+```
+
+```.env.development
+DB_TYPE=
+DB_NAME=
+```
+
+```.env.test
+DB_TYPE=
+DB_NAME=
+```
+
+## 🚀 Running the app
+
+For a weird reason, sometimes cross-env deos not work and environment variables are not being passed if you face this issue you can do the following:
+
+1. If you choose to run the project locally, in the `app.module.ts` file, replace the `TypeOrm.forRootAsync` with this
+
+```typescript
+TypeOrmModule.forRoot({
+  type: 'sqlite',
+  database: 'db.sqlite',
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
+  synchronize: true, // Remove in production
+}),
+```
+
+2. And in case you choose to run the project with docker, enable docker on your machine and run the docker compose to build and run the docker container and specifuy the env file expplicitly by running this command
+
+```bash
+docker compose —env-file=.env.production up
+```
+
+Running the app locally
 
 ```bash
 # development
-$ pnpm run start
+$ pnpm start
 
-# watch mode
+# watch mode (recomended)
 $ pnpm run start:dev
 
 # production mode
 $ pnpm run start:prod
 ```
 
-## Test
+## 🧪 Test
 
 ```bash
-# unit tests
+# unit tests (you can add the prefix --watch)
 $ pnpm run test
 
 # e2e tests
 $ pnpm run test:e2e
 
+# single file e2e tests
+$ pnpm run test:e2e -- item.e2e-spec.ts
+
 # test coverage
 $ pnpm run test:cov
 ```
 
-## Support
+### 🐳 Docker
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Make sure docker is running on your machine. And Obviously you installed it :)
 
-## Stay in touch
+```bash
+# Build and run the container
+Docker compose up
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+After running the Above command, you access the app from <http://localhost:3000/api/v1/>
 
-## License
+Other usefull commands
 
-Nest is [MIT licensed](LICENSE).
+```bash
+# Build docker images
+docker-compose build
+
+# Show docker images
+docker images
+
+# Show running docker containers
+docker ps -a
+```
+
+### 📄 License
+
+This project is open-sourced under the [MIT license](https://opensource.org/licenses/MIT).
