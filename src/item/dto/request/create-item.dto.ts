@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { BeerOrigin, ItemType } from '../../../common/types';
 
 export class CreateItemDto {
@@ -7,6 +13,8 @@ export class CreateItemDto {
     description: 'The name of the item',
     example: 'Whole Wheat Bread',
   })
+  @IsNotEmpty()
+  @IsString()
   name: string;
 
   @ApiProperty({

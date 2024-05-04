@@ -56,8 +56,7 @@ describe('ItemService', () => {
     });
 
     it('should handle errors when creating a new item', async () => {
-      const vegetableDto = createVegetableDtoFactory({});
-      const itemDto = createItemWithVegetableDto({});
+      const itemDto = createItemWithVegetableDto();
       mockItemRepository.save.mockRejectedValue(
         new Error('Error creating a new item'),
       );
@@ -69,9 +68,7 @@ describe('ItemService', () => {
 
     it('should create a new item of type BREAD', async () => {
       const breadDto = createBreadDtoFactory({});
-      const itemDto = createItemWithBreadDto({
-        price: 1,
-      });
+      const itemDto = createItemWithBreadDto();
       const newItem: Item = createItemFactory(breadDto, ItemType.BREAD);
 
       mockItemRepository.create.mockReturnValue(newItem);
@@ -81,7 +78,6 @@ describe('ItemService', () => {
       expect(result).toEqual(newItem);
       expect(mockItemRepository.create).toHaveBeenCalledWith({
         type: ItemType.BREAD,
-        price: 1,
         ...breadDto,
       });
       expect(mockItemRepository.save).toHaveBeenCalledWith(newItem);
@@ -89,9 +85,7 @@ describe('ItemService', () => {
 
     it('should create a new item of type VEGETABLE', async () => {
       const vegetableDto = createVegetableDtoFactory({});
-      const itemDto = createItemWithVegetableDto({
-        price: 50,
-      });
+      const itemDto = createItemWithVegetableDto();
       const newItem: Item = createItemFactory(vegetableDto, ItemType.VEGETABLE);
 
       mockItemRepository.create.mockReturnValue(newItem);
@@ -101,7 +95,6 @@ describe('ItemService', () => {
       expect(result).toEqual(newItem);
       expect(mockItemRepository.create).toHaveBeenCalledWith({
         type: ItemType.VEGETABLE,
-        price: 50,
         ...vegetableDto,
       });
       expect(mockItemRepository.save).toHaveBeenCalledWith(newItem);
@@ -109,9 +102,7 @@ describe('ItemService', () => {
 
     it('should create a new item of type BEER', async () => {
       const beerDto = createBeerDtoFactory({});
-      const itemDto = createItemWithBeerDto({
-        price: 200,
-      });
+      const itemDto = createItemWithBeerDto();
       const newItem: Item = createItemFactory(beerDto, ItemType.BEER);
 
       mockItemRepository.create.mockReturnValue(newItem);
@@ -121,7 +112,6 @@ describe('ItemService', () => {
       expect(result).toEqual(newItem);
       expect(mockItemRepository.create).toHaveBeenCalledWith({
         type: ItemType.BEER,
-        price: 200,
         ...beerDto,
       });
       expect(mockItemRepository.save).toHaveBeenCalledWith(newItem);
@@ -191,7 +181,6 @@ describe('ItemService', () => {
     });
 
     it('should update an item', async () => {
-      // created from factory method (create describe block)
       const beerItem = {
         id: 1,
         price: 200,

@@ -16,4 +16,12 @@ export class CreateVegetableDto {
   @IsNotEmpty()
   @IsNumber()
   weight: number;
+
+  @ApiProperty({
+    description: 'The price of the vegetable',
+    example: 1.99,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  price: number;
 }

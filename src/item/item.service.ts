@@ -19,30 +19,25 @@ export class ItemService {
     try {
       switch (createItemDto.type) {
         case ItemType.BREAD:
-          return await this.createBread(
-            {
-              name: createItemDto.name,
-              ageInDays: createItemDto.ageInDays,
-            },
-            createItemDto.price,
-          );
+          return await this.createBread({
+            name: createItemDto.name,
+            ageInDays: createItemDto.ageInDays,
+            price: createItemDto.price,
+            quantity: createItemDto.quantity,
+          });
         case ItemType.VEGETABLE:
-          return await this.createVegetable(
-            {
-              name: createItemDto.name,
-              weight: createItemDto.weight,
-            },
-            createItemDto.price,
-          );
+          return await this.createVegetable({
+            name: createItemDto.name,
+            weight: createItemDto.weight,
+            price: createItemDto.price,
+          });
         case ItemType.BEER:
-          return await this.createBeer(
-            {
-              name: createItemDto.name,
-              origin: createItemDto.origin,
-              quantity: createItemDto.quantity,
-            },
-            createItemDto.price,
-          );
+          return await this.createBeer({
+            name: createItemDto.name,
+            origin: createItemDto.origin,
+            quantity: createItemDto.quantity,
+            price: createItemDto.price,
+          });
         default:
           throw new Error('Invalid item type');
       }
@@ -52,35 +47,34 @@ export class ItemService {
     }
   }
 
-  async createBread(
-    createBreadDto: CreateBreadDto,
-    price: number,
-  ): Promise<Item> {
+  async createBread(createBreadDto: CreateBreadDto): Promise<Item> {
     const newItem = this.itemRepository.create({
       type: ItemType.BREAD,
-      price,
-      ...createBreadDto,
+      price: createBreadDto.price,
+      name: createBreadDto.name,
+      ageInDays: createBreadDto.ageInDays,
+      quantity: createBreadDto.quantity,
     });
     return await this.itemRepository.save(newItem);
   }
 
-  async createVegetable(
-    createVegetableDto: CreateVegetableDto,
-    price: number,
-  ): Promise<Item> {
+  async createVegetable(createVegetableDto: CreateVegetableDto): Promise<Item> {
     const newItem = this.itemRepository.create({
       type: ItemType.VEGETABLE,
-      price,
-      ...createVegetableDto,
+      price: createVegetableDto.price,
+      name: createVegetableDto.name,
+      weight: createVegetableDto.weight,
     });
     return await this.itemRepository.save(newItem);
   }
 
-  async createBeer(createBeerDto: CreateBeerDto, price: number): Promise<Item> {
+  async createBeer(createBeerDto: CreateBeerDto): Promise<Item> {
     const newItem = this.itemRepository.create({
       type: ItemType.BEER,
-      price,
-      ...createBeerDto,
+      price: createBeerDto.price,
+      name: createBeerDto.name,
+      origin: createBeerDto.origin,
+      quantity: createBeerDto.quantity,
     });
     return await this.itemRepository.save(newItem);
   }

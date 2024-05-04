@@ -11,7 +11,7 @@ import { ItemService } from './item.service';
 import { CreateItemDto } from './dto/request/create-item.dto';
 import { UpdateItemDto } from './dto/request/update-item.dto';
 
-@Controller('item')
+@Controller('items')
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 

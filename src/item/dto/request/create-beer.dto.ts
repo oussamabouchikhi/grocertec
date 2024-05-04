@@ -26,4 +26,12 @@ export class CreateBeerDto {
   @IsNotEmpty()
   @IsNumber()
   quantity: number;
+
+  @ApiProperty({
+    description: 'The price of the beer',
+    example: 2.99,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  price: number;
 }

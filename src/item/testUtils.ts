@@ -8,26 +8,35 @@ import { Item } from './entities/item.entity';
 export function createBreadDtoFactory({
   name = 'Bread',
   ageInDays = 2,
+  price = 2.99,
+  quantity = 1,
 }: {
   name?: string;
   ageInDays?: number;
+  price?: number;
+  quantity?: number;
 }): CreateBreadDto {
   return {
     name,
     ageInDays,
+    price,
+    quantity,
   };
 }
 
 export function createVegetableDtoFactory({
   name = 'Carrot',
   weight = 1,
+  price = 1.99,
 }: {
   name?: string;
   weight?: number;
+  price?: number;
 }): CreateVegetableDto {
   return {
     name,
     weight,
+    price,
   };
 }
 
@@ -35,15 +44,18 @@ export function createBeerDtoFactory({
   name = 'Beer',
   origin = BeerOrigin.BELGIUM,
   quantity = 1,
+  price = 2.99,
 }: {
   name?: string;
   origin?: BeerOrigin;
   quantity?: number;
+  price?: number;
 }): CreateBeerDto {
   return {
     name,
     origin,
     quantity,
+    price,
   };
 }
 
@@ -54,7 +66,6 @@ export function createItemFactory(dto: any, type: ItemType): Item {
         id: 1,
         order: null,
         receipt: null,
-        price: 100,
         type: ItemType.BREAD,
         ...dto,
       };
@@ -63,7 +74,6 @@ export function createItemFactory(dto: any, type: ItemType): Item {
         id: 1,
         order: null,
         receipt: null,
-        price: 50,
         type: ItemType.VEGETABLE,
         ...dto,
       };
@@ -72,7 +82,6 @@ export function createItemFactory(dto: any, type: ItemType): Item {
         id: 1,
         order: null,
         receipt: null,
-        price: 200,
         type: ItemType.BEER,
         ...dto,
       };
@@ -81,37 +90,24 @@ export function createItemFactory(dto: any, type: ItemType): Item {
   }
 }
 
-export function createItemWithBreadDto({
-  price = 100,
-}: {
-  price?: number;
-}): CreateBreadDto & {
-  price: number;
+export function createItemWithBreadDto(): CreateBreadDto & {
   type: ItemType.BREAD;
 } {
   const createBreadDto = createBreadDtoFactory({});
-  return { ...createBreadDto, price, type: ItemType.BREAD };
+  return { ...createBreadDto, type: ItemType.BREAD };
 }
 
-export function createItemWithVegetableDto({
-  price = 50,
-}: {
-  price?: number;
-}): CreateVegetableDto & {
+export function createItemWithVegetableDto(): CreateVegetableDto & {
   price: number;
   type: ItemType.VEGETABLE;
 } {
   const createVegetableDto = createVegetableDtoFactory({});
-  return { ...createVegetableDto, price, type: ItemType.VEGETABLE };
+  return { ...createVegetableDto, type: ItemType.VEGETABLE };
 }
 
-export function createItemWithBeerDto({
-  price = 200,
-}: {
-  price?: number;
-}): CreateItemDto & {
+export function createItemWithBeerDto(): CreateItemDto & {
   type: ItemType.BEER;
 } {
   const createBeerDto = createBeerDtoFactory({});
-  return { ...createBeerDto, price, type: ItemType.BEER };
+  return { ...createBeerDto, type: ItemType.BEER };
 }

@@ -1,6 +1,6 @@
 ### Create a new item
 
-POST http://localhost:3000/items
+POST http://localhost:3000/api/v1/items
 Content-Type: application/json
 
 {
@@ -13,21 +13,21 @@ Content-Type: application/json
 
 ### Get all items
 
-GET http://localhost:3000/items
+GET http://localhost:3000/api/v1/items
 
 ### Get an item by id
 
-GET http://localhost:3000/items/2
+GET http://localhost:3000/api/v1/items/2
 
 ### Update an item
 
-PATCH http://localhost:3000/items/4
+PATCH http://localhost:3000/api/v1/items/2
 Content-Type: application/json
 
 {
-  "price": 10.00
+  "price": 10
 }
 
 ### Delete an item
 
-DELETE http://localhost:3000/items/5
+DELETE http://localhost:3000/api/v1/items/2
